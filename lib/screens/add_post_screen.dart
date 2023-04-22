@@ -17,9 +17,9 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
-  bool _isLoading = false;
-  final TextEditingController _descriptionController = TextEditingController();
 
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _isLoading = false;
   void postImage(
     String uid,
     String username,
@@ -35,16 +35,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
         setState(() {
           _isLoading = false;
         });
-        showSnackBar('Posted', context);
+        showSnackBar('Posted!', context);
         clearImage();
       } else {
         setState(() {
           _isLoading = false;
         });
         showSnackBar(res, context);
+        clearImage();
       }
     } catch (e) {
-      showSnackBar(toString(), context);
+      showSnackBar(e.toString(), context);
     }
   }
 
@@ -79,7 +80,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               padding: const EdgeInsets.all(20),
               child: const Text("Cancel"),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
               },
             )
           ],
